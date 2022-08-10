@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import { Request, Response } from 'express';
+import { mokepons } from './mokepons';
 
 const port = process.env.PORT || 3005;
 const app = express();
@@ -53,6 +54,8 @@ class Player {
 const players = [];
 
 // Endpoints
+app.get('/mokepon', (req: Request, res: Response) => res.send(mokepons));
+
 app.get('/mokepon/join', (req: Request, res: Response) => {
   const id: string = `${Math.random()}`;
   const player = new Player(id);
@@ -70,6 +73,14 @@ app.post("/mokepon/:playerId", (req: Request, res: Response) => {
   player.assignMokepon(mokepon);
   res.end();
 });
+
+app.delete("/mokepon/:playerId", (req: Request, res: Response) => {
+  const playerId = req.params.playerId || '';
+  const player = players.find(p => p.id === playerId);
+
+  player.mokepon = null;
+  res.end();
+})
 
 app.post("/mokepon/:playerId/position", (req: Request, res: Response) => {
   const playerId = req.params.playerId || '';
