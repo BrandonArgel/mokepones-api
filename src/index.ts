@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import * as path from 'path'
 import { Request, Response } from 'express';
 import { mokepons } from './mokepons';
 
@@ -12,7 +13,6 @@ const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 200
 }
 
-app.use('/images', express.static(__dirname + '/images'));
 app.use(cors(corsOptions));
 
 class Mokepon {
@@ -55,6 +55,8 @@ class Player {
 const players = [];
 
 // Endpoints
+app.use('/images', express.static(path.join(__dirname, 'images')))
+
 app.get('/mokepon', (req: Request, res: Response) => res.send(mokepons));
 
 app.get('/mokepon/join', (req: Request, res: Response) => {
