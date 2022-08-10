@@ -1,3 +1,6 @@
+// const BASE_URL = 'https://mokepones-api.herokuapp.com';
+const BASE_URL = 'https://localhost:3005';
+
 const HIPODOGE_ATAQUES = [
   { nombre: "💧", id: "boton-agua" },
   { nombre: "💧", id: "boton-agua" },
@@ -17,28 +20,26 @@ const HIPODOGE_ATAQUES = [
   { nombre: "💧", id: "boton-agua" },
   { nombre: "🌱", id: "boton-tierra" },
 ];
-const mokepons = [
+export const mokepons = [
   {
     id: 1,
     name: 'Hipodoge',
-    img: "./images/hipodoge.png",
-    mini: "./images/hipodoge-mini.png",
+    img: `${BASE_URL}/images/hipodoge.png`,
+    mini: `${BASE_URL}/images/hipodoge-mini.png`,
     attacks: HIPODOGE_ATAQUES,
   },
   {
     id: 2,
     name: 'Capipepo',
-    img: "./images/capipepo.png",
-    mini: "./images/capipepo-mini.png",
+    img: `${BASE_URL}/images/capipepo.png`,
+    mini: `${BASE_URL}/images/capipepo-mini.png`,
     attacks: CAPIPEPO_ATAQUES,
   },
   {
     id: 3,
     name: 'Ratigueya',
-    img: "./images/ratigueya.png",
-    mini: "./images/ratigueya-mini.png",
+    img: `${BASE_URL}/images/ratigueya.png`,
+    mini: `${BASE_URL}/images/ratigueya-mini.png`,
     attacks: RATIGUEYA_ATAQUES,
   }
 ]
-
-module.exports = mokepons;
