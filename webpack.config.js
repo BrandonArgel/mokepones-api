@@ -1,6 +1,5 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
-const CopyPlugin = require("copy-webpack-plugin");
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || 3005;
 
@@ -35,14 +34,4 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [
-		new CopyPlugin({
-			patterns: [
-				{
-					from: "./src/images",
-					to: "./images",
-				},
-			],
-		}),
-	],
 };

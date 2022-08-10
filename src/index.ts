@@ -12,6 +12,7 @@ const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 200
 }
 
+app.use('/images', express.static(__dirname + '/images'));
 app.use(cors(corsOptions));
 
 class Mokepon {

@@ -1,23 +1,23 @@
 const BASE_URL = 'https://mokepones-api.herokuapp.com';
 
 const HIPODOGE_ATAQUES = [
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "💧" },
+  { nombre: "💧" },
+  { nombre: "💧" },
+  { nombre: "🔥" },
+  { nombre: "🌱" },
 ], CAPIPEPO_ATAQUES = [
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "🌱", id: "boton-tierra" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🔥", id: "boton-fuego" },
+  { nombre: "🌱" },
+  { nombre: "🌱" },
+  { nombre: "🌱" },
+  { nombre: "💧" },
+  { nombre: "🔥" },
 ], RATIGUEYA_ATAQUES = [
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "🔥", id: "boton-fuego" },
-  { nombre: "💧", id: "boton-agua" },
-  { nombre: "🌱", id: "boton-tierra" },
+  { nombre: "🔥" },
+  { nombre: "🔥" },
+  { nombre: "🔥" },
+  { nombre: "💧" },
+  { nombre: "🌱" },
 ];
 export const mokepons = [
   {
