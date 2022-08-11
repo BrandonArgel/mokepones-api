@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://mokepones-api.herokuapp.com';
-const BASE_URL = 'http://localhost:3005';
+const BASE_URL = 'https://mokepones-api.herokuapp.com';
 
 const HIPODOGE_ATAQUES = [
   { nombre: "💧" },
