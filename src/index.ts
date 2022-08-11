@@ -79,9 +79,9 @@ app.post("/mokepon/:playerId", (req: Request, res: Response) => {
 
 app.delete("/mokepon/:playerId", (req: Request, res: Response) => {
   const playerId = req.params.playerId || '';
-  const player = players.find(p => p.id === playerId);
+  // Delete player from the array
+  players.splice(players.findIndex(p => p.id === playerId), 1);
 
-  player.mokepon = null;
   res.end();
 })
 
