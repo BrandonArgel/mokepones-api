@@ -10,7 +10,8 @@ const ORIGIN_URL = 'http://localhost:3000';
 
 const corsOptions: cors.CorsOptions = {
   origin: ORIGIN_URL,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: 'GET,POST,DELETE',
 }
 
 app.use(cors(corsOptions));
@@ -27,6 +28,7 @@ type Attacks = Array<{ name: string, id: number }>
 type Coordinates = { x: number, y: number }
 
 class Player {
+  afk: boolean;
   attacks: Attacks;
   mokepon: Mokepon;
   id: string;
@@ -36,6 +38,7 @@ class Player {
   constructor(id: string) {
     this.id = id;
     this.mokepon = null;
+    this.afk = false;
   }
 
   assignMokepon(mokepon: Mokepon) {
@@ -57,6 +60,8 @@ const players = [];
 // Endpoints
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
+app.use(express.json());
+
 app.get('/mokepon', (req: Request, res: Response) => res.send(mokepons));
 
 app.get('/mokepon/join', (req: Request, res: Response) => {
@@ -69,20 +74,27 @@ app.get('/mokepon/join', (req: Request, res: Response) => {
 
 app.post("/mokepon/:playerId", (req: Request, res: Response) => {
   const playerId = req.params.playerId || '';
-  const name = req.body.name || '';
-  const mokepon = new Mokepon(name);
+  const { mokepon } = req.body || '';
   const player = players.find(p => p.id === playerId);
 
   player.assignMokepon(mokepon);
-  res.end();
+
+  if (player.mokepon === null) {
+    res.status(400).send({ message: 'No mokepon assigned', status: 'error', statusCode: 400 });
+  }
+  console.log({ players });
+  res.status(200).send({ message: 'Mokepon assigned', status: 'success', statusCode: 200 });
 });
 
 app.delete("/mokepon/:playerId", (req: Request, res: Response) => {
   const playerId = req.params.playerId || '';
-  // Delete player from the array
   players.splice(players.findIndex(p => p.id === playerId), 1);
 
-  res.end();
+  if (players.find(p => p.id === playerId)) {
+    res.status(400).send({ message: 'Player not found', status: 'error', statusCode: 400 });
+  }
+  console.log({ players });
+  res.status(200).send({ message: 'Player deleted', status: 'success', statusCode: 200 });
 })
 
 app.post("/mokepon/:playerId/position", (req: Request, res: Response) => {
@@ -94,6 +106,16 @@ app.post("/mokepon/:playerId/position", (req: Request, res: Response) => {
   player.updatePosition({ x, y });
   res.send({ enemies });
 });
+
+app.post("/mokepon/:playerId/afk", (req: Request, res: Response) => {
+  const playerId = req.params.playerId || '';
+  const { afk } = req.body || "";
+  const player = players.find(p => p.id === playerId);
+
+  console.log({ afk });
+  player.afk = afk;
+  res.send({ message: afk ? 'User is now AFK' : 'User is no longer AFK', status: 'success', statusCode: 200 });
+})
 
 app.post("/mokepon/:playerId/attacks", (req: Request, res: Response) => {
   const playerId = req.params.playerId || '';
